@@ -89,6 +89,8 @@ namespace acPlugins4net.info
             }
         }
 
+        public string BestLapTxt => AcServerPluginManager.FormatTimespan((int)this.BestLap);
+
         private int lastTime = -1;
         private Vector3f lastPos, lastVel;
         private float lastSplinePos;
