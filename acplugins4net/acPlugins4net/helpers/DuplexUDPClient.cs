@@ -69,10 +69,10 @@ namespace acPlugins4net.helpers
 
                 if (Thread.CurrentThread != _processMessagesThread)
                 {
-                    _processMessagesThread.Join(); // make sure thread has terminated
+                    if (!_processMessagesThread.Join(1000)) _processMessagesThread.Abort(); // make sure thread has terminated
                 }
-                _receiveMessagesThread.Join(); // make sure thread has terminated
-                _sendMessagesThread.Join(); // make sure thread has terminated
+                if (!_receiveMessagesThread.Join(1000)) _receiveMessagesThread.Abort();// make sure thread has terminated
+                if (!_sendMessagesThread.Join(1000)) _sendMessagesThread.Abort(); // make sure thread has terminated
 
                 _plugin = null;
                 _messageQueue.Clear();
